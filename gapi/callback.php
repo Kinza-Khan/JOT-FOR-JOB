@@ -16,13 +16,13 @@ if(isset($_GET['code'])){
     $_SESSION['user_email'] = $user_info->email;
     $_SESSION['picture'] = $user_info->picture;
     
-    $query = $pdo->prepare("select * from users where email = :email");
-    $query->bindParam('email',$_SESSION['user_email']);
-    $query->execute();
-    $user = $query->fetch(PDO::FETCH_ASSOC);
-    if(!$user){
-           $query = $pdo->prepare("insert into users () values ()");     
-    }
+    // $query = $pdo->prepare("select * from users where email = :email");
+    // $query->bindParam('email',$_SESSION['user_email']);
+    // $query->execute();
+    // $user = $query->fetch(PDO::FETCH_ASSOC);
+    // if(!$user){
+    //        $query = $pdo->prepare("insert into users () values ()");     
+    // }
     
     header('location:user.php');
 
