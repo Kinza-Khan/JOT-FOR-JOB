@@ -14,13 +14,14 @@
       $strArray = explode(' ',$str);
       print_r ($strArray);
       echo "<br>" ;
-    $fileName = "img1.png.JPG";
+      // die();
+    $fileName = "img1.png";
     $fileNameArray = explode('.',$fileName);
     print_r($fileNameArray); //Array ( [0] => img1 [1] => png )
     echo "<br>";
     $fileExtension = $fileNameArray[count($fileNameArray)-1];
     echo $fileExtension ;
-
+    // die();
       ?>
       <form action="" method="post">
         <input type="file" name="cImage">

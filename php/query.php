@@ -101,4 +101,41 @@ if(isset($_POST['userLogin'])){
     }
 }
 
+
+// product
+$pName = $pImageName = "" ;
+$pNameErr = $pImageNameErr = "" ;
+// $pName = "" ;
+// $pImageName = "" ; 
+if(isset($_POST['addProduct'])){
+    $pName = $_POST['pName'];
+    $pImageName = strtolower($_FILES['pImage']['name']);
+    $pImageTmpName = $_FILES['pImage']['tmp_name'];
+    $extension = pathinfo($pImageName ,PATHINFO_EXTENSION);
+    $destination = "images/".$pImageName ;
+    $format  = ["jpg" , "png" , "jpeg" , "svg"];
+    if(empty($pImageName)){
+        $pImageNameErr = "Image is Required" ;
+    }
+    else{
+        
+        if(!in_array($extension , $format)){
+            $pImageNameErr = "invalid extesnion" ;
+    }
+}
+
+    if(empty($pName)){
+        $pNameErr = "Product Name is Required";
+    }
+    if(empty($pImageNameErr) && empty($pNameErr)){
+            if(move_uploaded_file($pImageTmpName , $destination)){
+                $query = $pdo->prepare("insert into products (name, image) values (:pName, :pImage)");
+                $query->bindParam('pName',$pName);
+                $query->bindParam('pImage',$pImageName);
+                $query->execute();
+                echo "<script>alert('added');location.assign('image.php')</script>";
+
+            }
+    }
+}
 ?>
